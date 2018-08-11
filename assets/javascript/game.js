@@ -3,10 +3,10 @@
 //Arrays & Variables go here (to hold data)
 
 //All of the possible options for words to guess!
-var wordOptions = ["hangman", "hangwoman", "hungman", "noose", "hangery"];
+var wordOptions = ["slime", "blonde", "gameshow", "sailor", "hysteria", "librarian", "Pecker", "capital", "marshmellows", "ghost"];
 
 //Array that will hold teh chosen word
-var selectedWord ="";
+var selectedWord = "";
 
 //What letters are in the word...
 var letters = [];
@@ -18,7 +18,7 @@ var numBlanks = 0;
 var blanksAndSuccesses = [];
 
 //Array for wrong guesses
-var wrongLetters =[];
+var wrongLetters = [];
 
 //The Movie The Game Counter
 var winCount = 0;
@@ -30,7 +30,7 @@ var guessesLeft = 9;
 //--------------------------------------------------------------
 
 //START THE GAME
-function startGame () {
+function startGame() {
     selectedWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
     lettersinWord = selectedWord.split("");
     numBlanks = lettersinWord.lenght;
@@ -41,7 +41,7 @@ function startGame () {
     blanksAndSuccesses = [];
 
     //Create the blanks and successes with correct number of blanks
-    for (var i=0; i < numBlanks; ++i){
+    for (var i = 0; i < numBlanks; ++i) {
         blanksAndSuccesses.push("_");
     }
     //This will change the HTML to reflect the round conditions
@@ -53,7 +53,7 @@ function startGame () {
     //Just testin' some code ovah heeah
     console.log(selectedWord);
     console.log(lettersinWord);
-    console.log(numBlanks); 
+    console.log(numBlanks);
     console.log(blanksAndSuccesses);
 
 }
@@ -62,41 +62,35 @@ function checkLetters(letter) {
     //to check if letter exists in code
     var isLetterInWord = false;
 
-    for (var i=0; i<numBlanks; i++){
-        if(selectedWord[i] == letter){
+    for (var i = 0; i < numBlanks; i++) {
+        if (selectedWord[i] == letter) {
             isLetterInWord = true;
         }
     }
     //check where in word letter exists, then pop out blanksandsuccesses array
-    if(isLetterInWord) {
-    for(var i=0; i<numBlanks; i++) {
-        if(selectedWord[i] == letter) {
-            blanksAndSuccesses[i] = letter;
+    if (isLetterInWord) {
+        for (var i = 0; i < numBlanks; i++) {
+            if (selectedWord[i] == letter) {
+                blanksAndSuccesses[i] = letter;
+            }
         }
     }
+    //else letter isn't found
+    else {
+        wrongLetters.push(letter);
+        numGuesses--
+    }
+
+    //testing, testingg
+    console.log(blanksAndSuccesses);
 }
-//else letter isn't found
-else {
-    wrongLetters.push(letter);
-    numGuesses--
-}
+    //Main Process
+    //--------------------------------------------------------------
+    //This will being the code for the very first time!
 
-//testing, testingg
-console.log(blanksAndSuccesses);
+    startGame();
 
-
-//Main Process
-//--------------------------------------------------------------
-//This will being the code for the very first time!
-
-startGame();
-
-//Keyclicks
-document.onkeyup = function(event) {
-    var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
-
-
-
-    //another test...
-console.log("letterGuessed");
-}
+    //Keyclicks
+    document.onkeyup = function (event) {
+        var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+    }
