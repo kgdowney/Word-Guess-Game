@@ -25,7 +25,6 @@ var winCount = 0;
 var lossCount = 0;
 var guessesLeft = 12;
 
-
 //Functions
 //--------------------------------------------------------------
 
@@ -108,7 +107,7 @@ function checkLetters(letter) {
         else if (guessesLeft == 0) {
             lossCount++;
             alert("This reminds me of the time you tried to drill a hole through your head. Try again.")
-l
+
             //update HTML
             document.getElementById("lossCounter").innerHTML = lossCount;
             
