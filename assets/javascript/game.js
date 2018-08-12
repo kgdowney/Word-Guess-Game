@@ -9,7 +9,7 @@ var wordOptions = ["slime", "blonde", "gameshow", "sailor", "hysteria", "librari
 var selectedWord = "";
 
 //What letters are in the word...
-var letters = [];
+var lettersinWord = [];
 
 //To Calulate the number of blanks
 var numBlanks = 0;
@@ -23,7 +23,7 @@ var wrongLetters = [];
 //The Movie The Game Counter
 var winCount = 0;
 var lossCount = 0;
-var guessesLeft = 9;
+var guessesLeft = 12;
 
 
 //Functions
@@ -32,11 +32,11 @@ var guessesLeft = 9;
 //START THE GAME
 function startGame() {
     selectedWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
-    lettersinWord = selectedWord.split("");
-    numBlanks = lettersinWord.lenght;
+    lettersinWord = selectedWord.split(""); //having an array with individual letters
+    numBlanks = lettersinWord.lenght; //how many blanks are requred
 
     //We need to reset
-    guessLeft = 9;
+    guessesLeft = 9;
     wrongLetters = [];
     blanksAndSuccesses = [];
 
@@ -78,12 +78,44 @@ function checkLetters(letter) {
     //else letter isn't found
     else {
         wrongLetters.push(letter);
-        numGuesses--
+        guessesLeft--
     }
 
     //testing, testingg
     console.log(blanksAndSuccesses);
 }
+
+    function roundComplete() {
+        console.log("Win Count: " + winCount + " | Loss Count: " + lossCount + " | Guesses Left" + guessesLeft);
+
+        //update the HTML to rflect the most recent count stats
+        document.getElementById("numGuesses").innerHTML = guessesLeft;
+        document.getElementById("wordToGuess").innerHTML = blanksAndSuccesses.join(" ");
+        document.getElementById("wrongGuesses").innerHTML = wrongLetters.join(" ");
+
+        //check if user won
+        if (lettersinWord.toString() == blanksAndSuccesses.toString()) {
+            winCount++;
+            alert("We came, we saw, we kicked its ass!");
+
+            //update win counter in HTML
+            document.getElementById("winCounter").innerHTML = winCount;
+
+            startGame();
+        }
+
+        //check if user lost
+        else if (guessesLeft == 0) {
+            lossCount++;
+            alert("This reminds me of the time you tried to drill a hole through your head. Try again.")
+
+            //update HTML
+            document.getElementById("lossCounter").innerHTML = lossCount;
+            
+            startGame();
+        }
+
+    }
     //Main Process
     //--------------------------------------------------------------
     //This will being the code for the very first time!
@@ -93,4 +125,12 @@ function checkLetters(letter) {
     //Keyclicks
     document.onkeyup = function (event) {
         var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+        checkLetters(letterGuessed);
+        roundComplete();
+
+        //test
+        console.log(letterGuessed);
     }
+
+    //testing
+    
