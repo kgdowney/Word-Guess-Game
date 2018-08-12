@@ -3,7 +3,7 @@
 //Arrays & Variables go here (to hold data)
 
 //All of the possible options for words to guess!
-var wordOptions = ["slime", "blonde", "gameshow", "sailor", "hysteria", "librarian", "Pecker", "capital", "marshmellows", "ghost"];
+var wordOptions = ["slime", "blonde", "gameshow", "sailor", "hysteria", "librarian", "pecker", "capital", "marshmellows", "ghost"];
 
 //Array that will hold teh chosen word
 var selectedWord = "";
@@ -33,10 +33,10 @@ var guessesLeft = 12;
 function startGame() {
     selectedWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
     lettersinWord = selectedWord.split(""); //having an array with individual letters
-    numBlanks = lettersinWord.lenght; //how many blanks are requred
+    numBlanks = lettersinWord.length; //how many blanks are requred
 
     //We need to reset
-    guessesLeft = 9;
+    guessesLeft = 12;
     wrongLetters = [];
     blanksAndSuccesses = [];
 
@@ -96,7 +96,7 @@ function checkLetters(letter) {
         //check if user won
         if (lettersinWord.toString() == blanksAndSuccesses.toString()) {
             winCount++;
-            alert("We came, we saw, we kicked its ass!");
+            alert("You came, you saw, you kicked its ass!");
 
             //update win counter in HTML
             document.getElementById("winCounter").innerHTML = winCount;
@@ -108,7 +108,7 @@ function checkLetters(letter) {
         else if (guessesLeft == 0) {
             lossCount++;
             alert("This reminds me of the time you tried to drill a hole through your head. Try again.")
-
+l
             //update HTML
             document.getElementById("lossCounter").innerHTML = lossCount;
             
